@@ -86,7 +86,7 @@ export class AgentesComponent implements OnInit {
   abrirDetalhesModal(detalhes: RegiaoTable) {
 		const dialogRef = this.dialog.open(DetalhesModal, {
       width: '60rem',
-      height: '30rem',
+      height: '35rem',
 			data: {detalhes}
 		});
 		dialogRef.afterClosed().subscribe(result => {
