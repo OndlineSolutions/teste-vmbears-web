@@ -38,7 +38,7 @@
                 <input hidden #fileInput type="file" id="file" (change)="uploadFile($event.target.files)" accept=".xml">
             </div>
             <div>
-                <button (click)="openDeleteModal()" matTooltip="Remover selecionados" class="rounded-full acoes"
+                <button [disabled]="!this.selection.selected.length" (click)="openDeleteModal()" matTooltip="Remover selecionados" class="rounded-full acoes"
                     color="warn" mat-raised-button type="button">
                     <ic-icon [icon]="icDelete" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
                     </ic-icon>
