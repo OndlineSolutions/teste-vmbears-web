@@ -46,7 +46,7 @@
                 </button>
             </div>
             <div>
-                <button (click)="sendFiles()" matTooltip="Validar arquivos carregados" class="rounded-full acoes"
+                <button [disabled]="!listFilesToSent.length" (click)="sendFiles()" matTooltip="Validar arquivos carregados" class="rounded-full acoes"
                     color="primary" mat-raised-button type="button">
                     <ic-icon [icon]="icSend" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
                     </ic-icon>
