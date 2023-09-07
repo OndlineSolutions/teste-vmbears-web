@@ -1,7 +1,7 @@
 <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
     <div class="row buttons" *ngIf="regioes.length > 0">
         <div class="">
-            <button (click)="abrirModalDeletar()" matTooltip="Remover dados salvos da base de dados"
+            <button (click)="abrirModalDeletar()" matTooltip="Limpar base de dados para enviar novamente"
                 class="rounded-full acoes" color="warn" mat-stroked-button type="button">
                 <ic-icon [icon]="icSync" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
                 </ic-icon>
@@ -9,8 +9,9 @@
             </button>
         </div>
     </div>
+    <div *ngIf="!carregando; else loading"></div>
     <div *ngIf="regioes.length > 0">
-        <div class="mat-elevation-z8" *ngIf="!carregando; else loading">
+        <div class="mat-elevation-z8" *ngIf="!carregando">
     
             <table aria-label="tabela-agentes" mat-table [dataSource]="dataSource">
     

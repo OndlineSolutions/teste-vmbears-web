@@ -128,6 +128,7 @@ export class XmlViewComponent implements OnInit {
 	}
 
 	sendFiles() {
+		this.load = true;
 		console.log("listFilesToSent");
 
 		console.log(this.listFilesToSent);
@@ -141,8 +142,11 @@ export class XmlViewComponent implements OnInit {
 			setTimeout(() => {
 				this.xmlViewService.enviarArquivos(formData).subscribe(() => {
 					file.status = "Enviado";
+					this.load = false;
 				}, (error) => {
+					this.load = false;
 					console.log(error);
+					this._snackBar.open("Falha ao carregar " + file.name, 'Fechar', { duration: 3000 })
 				})
 			}, 2000);
 		})

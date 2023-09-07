@@ -112,6 +112,11 @@
                 <img class="m-12 h-64" src="assets/img/illustrations/idea.svg">
                 <h2 class="headline m-0 text-center">Nenhum arquivo carregado.</h2>
             </div>
+
+            <!-- aguarde -->
+            <div style="margin-top: 2rem;" *ngIf="load" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
+                <h2 class="headline m-0 text-center">Por favor aguarde...</h2>
+            </div>
         </div>
     </div>
 </vex-scrollbar>
