@@ -1,0 +1,35 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+	<h2 class="title m-0">Detalhes - Código Agente: {{detalhes.codigo}} Sigla {{detalhes.sigla}}</h2>
+</div>
+<div class="mat-elevation-z8">
+	<table style="width: 100%" aria-label="tabela-agentes" mat-table [dataSource]="dataSource">
+
+		<ng-container matColumnDef="geracao">
+			<th mat-header-cell *matHeaderCellDef>Geração</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.valorGeracao }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="compra">
+			<th mat-header-cell *matHeaderCellDef>Compra</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.valorCompra }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="precoMedio">
+			<th mat-header-cell *matHeaderCellDef>Preço Médio</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.valorPrecoMedio }}
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+
+	<mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons aria-label="Selecione as páginas de Agentes">
+	</mat-paginator>
+</div>

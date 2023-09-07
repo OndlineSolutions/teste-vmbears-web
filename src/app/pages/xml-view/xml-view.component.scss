@@ -1,0 +1,47 @@
+
+table {
+    width: 100%;
+}
+    
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+    
+td, th {
+  width: 25%;
+}
+.mat-raised-button{    
+  margin: auto;
+  color:white; 
+}
+
+.mat-raised-button, .mat-stroked-button{    
+  margin: auto;
+}
+
+material-tooltip {
+    transform: translateY(0) translateX(0px) !important;
+}
+
+ .icon-Send{
+    color: rgb(66, 118, 66);
+ }
+
+.buttons{
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+}
+.acoes{
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.semArquivos{
+  color: var(--sidenav-background);
+  display: flex;
+  justify-content: 
+  center; align-items:
+  center; margin-top: 5rem;
+}

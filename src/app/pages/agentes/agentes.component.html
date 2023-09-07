@@ -1,0 +1,67 @@
+<vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
+    <div class="row buttons" *ngIf="regioes.length > 0">
+        <div class="">
+            <button (click)="abrirModalDeletar()" matTooltip="Remover dados salvos da base de dados"
+                class="rounded-full acoes" color="warn" mat-stroked-button type="button">
+                <ic-icon [icon]="icSync" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                </ic-icon>
+                <span>Restaurar</span>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="regioes.length > 0">
+        <div class="mat-elevation-z8" *ngIf="!carregando; else loading">
+    
+            <table aria-label="tabela-agentes" mat-table [dataSource]="dataSource">
+    
+                <ng-container matColumnDef="codigoAgente">
+                    <th mat-header-cell *matHeaderCellDef>Código Agente</th>
+                    <td mat-cell *matCellDef="let regiao">
+                        {{ regiao.codigo }}
+                    </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="data">
+                    <th mat-header-cell *matHeaderCellDef>Data</th>
+                    <td mat-cell *matCellDef="let regiao">
+                        {{ regiao.data | date: "dd/MM/YYYY hh:mm" }}
+                    </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="sigla">
+                    <th mat-header-cell *matHeaderCellDef>Sigla</th>
+                    <td mat-cell *matCellDef="let regiao">
+                        {{ regiao.sigla }}
+                    </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="detalhes">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td class="layout-detalhes" mat-cell *matCellDef="let regiao">
+                        <button (click)="abrirDetalhesModal(regiao)" mat-raised-button color="primary">Detalhes</button>
+                    </td>
+                </ng-container>
+    
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+    
+            <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons
+                aria-label="Selecione as páginas de Agentes">
+            </mat-paginator>
+        </div>
+    </div>
+
+    <div *ngIf="regioes.length === 0" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
+        <img class="m-12 h-64" src="assets/img/illustrations/idea.svg">
+        <h2 class="headline m-0 text-center">Sem dados para exibir, adicione um arquivo na tela de XML.</h2>
+    </div>
+
+</vex-scrollbar>
+
+<ng-template #loading>
+    <div class="loader custom-loader">
+        <mat-progress-spinner mode="indeterminate" diameter="34"></mat-progress-spinner>
+    </div>
+</ng-template>

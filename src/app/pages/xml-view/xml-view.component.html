@@ -1,0 +1,117 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
+    <div>
+        <div class="row buttons">
+            <div>
+                <button (click)="baixarTemplate('exemplo_01.xml')" matTooltip="Baixar template 1" class="rounded-full acoes" color="primary" mat-stroked-button
+                    type="button">
+                    <ic-icon [icon]="icDownload" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                    </ic-icon>
+                    <span>Baixar Template 1</span>
+                </button>
+            </div>
+            <div>
+                <button (click)="baixarTemplate('exemplo_02.xml')" matTooltip="Baixar template 2" class="rounded-full acoes" color="primary" mat-stroked-button
+                    type="button">
+                    <ic-icon [icon]="icDownload" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                    </ic-icon>
+                    <span>Baixar Template 2</span>
+                </button>
+            </div>
+            <div>
+                <button (click)="baixarTemplate('exemplo_03.xml')" matTooltip="Baixar template 3" class="rounded-full acoes" color="primary" mat-stroked-button
+                    type="button">
+                    <ic-icon [icon]="icDownload" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                    </ic-icon>
+                    <span>Baixar Template 3</span>
+                </button>
+            </div>
+            <div>
+                <button (click)="fileInput.click()" matTooltip="Adicionar arquivo" class="rounded-full acoes"
+                    color="primary" mat-raised-button type="button">
+                    <ic-icon [icon]="icAdd" class=" ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                    </ic-icon>
+                    <span>Adicionar</span>
+                </button>
+                <input hidden #fileInput type="file" id="file" (change)="uploadFile($event.target.files)" accept=".xml">
+            </div>
+            <div>
+                <button (click)="openDeleteModal()" matTooltip="Remover selecionados" class="rounded-full acoes"
+                    color="warn" mat-raised-button type="button">
+                    <ic-icon [icon]="icDelete" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                    </ic-icon>
+                    <span>Remover</span>
+                </button>
+            </div>
+            <div>
+                <button (click)="sendFiles()" matTooltip="Validar arquivos carregados" class="rounded-full acoes"
+                    color="primary" mat-raised-button type="button">
+                    <ic-icon [icon]="icSend" class="ltr:-ml-2 rtl:-mr-2 ltr:mr-2 rtl:ml-2" inline="true" size="16px">
+                    </ic-icon>
+                    <span>Enviar</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="row" style="display: flex; flex-direction: column; align-items: center;">
+            <table *ngIf="listFilesToSent.length > 0" mat-table matSort [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let file"> {{file.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="size">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Tamanho </th>
+                    <td mat-cell *matCellDef="let file"> {{file.sizeConvert }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th class="colum" mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let file">
+                        <div class="row">
+                            <div class="col">
+                                {{file.status }}
+                            </div>
+                            <div class="col">
+                                <div *ngIf="file.status == 'Enviando' || load">
+                                    <mat-spinner [diameter]="20"></mat-spinner>
+                                </div>
+                                <div *ngIf="file.status == 'Enviado'">
+                                    <mat-icon class="icon-Send">check_box</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+
+            <!-- SEM DADOS PARA EXIBIR -->
+            <div *ngIf="listFilesToSent.length === 0" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
+                <img class="m-12 h-64" src="assets/img/illustrations/idea.svg">
+                <h2 class="headline m-0 text-center">Nenhum arquivo carregado.</h2>
+            </div>
+        </div>
+    </div>
+</vex-scrollbar>

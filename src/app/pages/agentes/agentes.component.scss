@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+.layout-detalhes {
+  text-align: center;
+  justify-content: center;
+}
+.buttons{
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+}
+.acoes{
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.custom-loader{
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+}
